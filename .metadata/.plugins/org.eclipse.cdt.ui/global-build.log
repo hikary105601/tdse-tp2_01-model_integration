@@ -1,60 +1,42 @@
-20:22:14 **** Incremental Build of configuration Debug for project tdse-tp2_01-model_integration ****
+21:28:53 **** Incremental Build of configuration Debug for project tdse-tp2_02-model_integration ****
 make -j4 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I../app/inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
-../Core/Src/main.c: In function 'main':
-../Core/Src/main.c:115:16: warning: variable 'var' set but not used [-Wunused-but-set-variable]
-  115 |           bool var = false;
-      |                ^~~
-arm-none-eabi-gcc -o "tdse-tp2_01-model_integration.elf" @"objects.list"  -lrdimon -mcpu=cortex-m3 -T"C:\Users\Hikar\STM32CubeIDE\workspace_1.18.0\tdse_workspace_tp2\tdse-tp2_01-model_integration\STM32F103RBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="tdse-tp2_01-model_integration.map" -Wl,--gc-sections -static -specs=rdimon.specs --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: tdse-tp2_01-model_integration.elf
- 
-arm-none-eabi-size  tdse-tp2_01-model_integration.elf 
-arm-none-eabi-objdump -h -S tdse-tp2_01-model_integration.elf  > "tdse-tp2_01-model_integration.list"
+arm-none-eabi-size  tdse-tp2_02-model_integration.elf 
    text	   data	    bss	    dec	    hex	filename
-  15980	    152	   2312	  18444	   480c	tdse-tp2_01-model_integration.elf
+  15944	    152	   2336	  18432	   4800	tdse-tp2_02-model_integration.elf
 Finished building: default.size.stdout
  
-Finished building: tdse-tp2_01-model_integration.list
- 
-20:22:25 **** Incremental Build of configuration Debug for project tdse-tp2_01-model_integration ****
+21:29:26 **** Incremental Build of configuration Debug for project tdse-tp2_02-model_integration ****
 make -j4 all 
-arm-none-eabi-size  tdse-tp2_01-model_integration.elf 
+arm-none-eabi-size  tdse-tp2_02-model_integration.elf 
    text	   data	    bss	    dec	    hex	filename
-  15980	    152	   2312	  18444	   480c	tdse-tp2_01-model_integration.elf
+  15944	    152	   2336	  18432	   4800	tdse-tp2_02-model_integration.elf
 Finished building: default.size.stdout
  
-20:26:36 **** Incremental Build of configuration Debug for project tdse-tp2_01-model_integration ****
+21:30:11 **** Incremental Build of configuration Debug for project tdse-tp2_02-model_integration ****
 make -j4 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I../app/inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
-arm-none-eabi-gcc -o "tdse-tp2_01-model_integration.elf" @"objects.list"  -lrdimon -mcpu=cortex-m3 -T"C:\Users\Hikar\STM32CubeIDE\workspace_1.18.0\tdse_workspace_tp2\tdse-tp2_01-model_integration\STM32F103RBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="tdse-tp2_01-model_integration.map" -Wl,--gc-sections -static -specs=rdimon.specs --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: tdse-tp2_01-model_integration.elf
- 
-arm-none-eabi-size  tdse-tp2_01-model_integration.elf 
-arm-none-eabi-objdump -h -S tdse-tp2_01-model_integration.elf  > "tdse-tp2_01-model_integration.list"
+arm-none-eabi-size  tdse-tp2_02-model_integration.elf 
    text	   data	    bss	    dec	    hex	filename
-  15944	    152	   2312	  18408	   47e8	tdse-tp2_01-model_integration.elf
+  15944	    152	   2336	  18432	   4800	tdse-tp2_02-model_integration.elf
 Finished building: default.size.stdout
  
-Finished building: tdse-tp2_01-model_integration.list
- 
-20:39:55 **** Incremental Build of configuration Debug for project tdse-tp2_01-model_integration ****
+21:30:28 **** Incremental Build of configuration Debug for project tdse-tp2_02-model_integration ****
 make -j4 all 
-arm-none-eabi-size  tdse-tp2_01-model_integration.elf 
+arm-none-eabi-size  tdse-tp2_02-model_integration.elf 
    text	   data	    bss	    dec	    hex	filename
-  15944	    152	   2312	  18408	   47e8	tdse-tp2_01-model_integration.elf
+  15944	    152	   2336	  18432	   4800	tdse-tp2_02-model_integration.elf
 Finished building: default.size.stdout
  
-20:51:28 **** Incremental Build of configuration Debug for project tdse-tp2_01-model_integration ****
+21:30:46 **** Incremental Build of configuration Debug for project tdse-tp2_02-model_integration ****
 make -j4 all 
-arm-none-eabi-gcc "../app/src/task_sensor.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I../app/inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"app/src/task_sensor.d" -MT"app/src/task_sensor.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "app/src/task_sensor.o"
-arm-none-eabi-gcc -o "tdse-tp2_01-model_integration.elf" @"objects.list"  -lrdimon -mcpu=cortex-m3 -T"C:\Users\Hikar\STM32CubeIDE\workspace_1.18.0\tdse_workspace_tp2\tdse-tp2_01-model_integration\STM32F103RBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="tdse-tp2_01-model_integration.map" -Wl,--gc-sections -static -specs=rdimon.specs --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: tdse-tp2_01-model_integration.elf
- 
-arm-none-eabi-size  tdse-tp2_01-model_integration.elf 
-arm-none-eabi-objdump -h -S tdse-tp2_01-model_integration.elf  > "tdse-tp2_01-model_integration.list"
+arm-none-eabi-size  tdse-tp2_02-model_integration.elf 
    text	   data	    bss	    dec	    hex	filename
-  15944	    152	   2336	  18432	   4800	tdse-tp2_01-model_integration.elf
+  15944	    152	   2336	  18432	   4800	tdse-tp2_02-model_integration.elf
 Finished building: default.size.stdout
  
-Finished building: tdse-tp2_01-model_integration.list
+21:33:08 **** Incremental Build of configuration Debug for project tdse-tp2_02-model_integration ****
+make -j4 all 
+arm-none-eabi-size  tdse-tp2_02-model_integration.elf 
+   text	   data	    bss	    dec	    hex	filename
+  15944	    152	   2336	  18432	   4800	tdse-tp2_02-model_integration.elf
+Finished building: default.size.stdout
  

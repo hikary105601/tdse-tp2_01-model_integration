@@ -3,6 +3,11 @@
 	<item key="hasShownOverlayPopupBefore" value="true"/>
 	<item key="replaceBarOpen" value="false"/>
 	<list key="searchhistory">
+		<item value="main("/>
+		<item value="HAL_"/>
+		<item value="HAL_r"/>
+		<item value="HAL_R"/>
+		<item value="ID_BTN_A"/>
 		<item value="ST_BTN_XX_UP"/>
 		<item value="ST_BTN_XX_FALLING"/>
 	</list>
