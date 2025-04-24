@@ -112,6 +112,9 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+	  bool var = false;
+	  var = HAL_GPIO_ReadPin(BTN1_Pin, BTN1_GPIO_Port);
+
 
 	  /* Application Update */
 	  app_update();
