@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<item key="hasShownOverlayPopupBefore" value="true"/>
-	<item key="replaceBarOpen" value="false"/>
+	<item key="replaceBarOpen" value="true"/>
 	<list key="searchhistory">
+		<item value="1"/>
+		<item value="\d"/>
+		<item value="/d"/>
+		<item value="$(/d)"/>
+		<item value="$(/n)"/>
 		<item value="main("/>
 		<item value="HAL_"/>
 		<item value="HAL_r"/>
@@ -10,5 +15,12 @@
 		<item value="ID_BTN_A"/>
 		<item value="ST_BTN_XX_UP"/>
 		<item value="ST_BTN_XX_FALLING"/>
+	</list>
+	<list key="replacehistory">
+		<item value="6"/>
+		<item value="5"/>
+		<item value="4"/>
+		<item value="3"/>
+		<item value="2"/>
 	</list>
 </section>

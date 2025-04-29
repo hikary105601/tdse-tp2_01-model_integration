@@ -1,0 +1,30 @@
+ app.c (app.h)
+   Endless loops, which execute tasks with fixed computing time. This 
+   sequential execution is only deviated from when an interrupt event occurs.
+
+Declaración de constantes de inicialización
+G_APP_CNT_INI: tiempo inicial del contador g_app_cnt
+G_APP_TICK_CNT_INI: valor de tick mínimo para comparar en app_update
+TASK_X_WCET_INI: valor inicial para el worst case execution time
+TASK_X_DELAY_MIN: No tiene uso
+
+estructura task_cfg_t: configuración de tarea
+ - task_init: puntero a función para la inicialización de la tarea 
+ - task_update: puntero a función para la actualización de la tarea
+ - parameters: puntero a los parámetros
+ 
+ estructura task_dta_t: estructura que guarda el peor tiempo de ejecución
+
+task_cfg_t task_cfg_list[]: arreglo de configuraciones de tarea, con punteros a funciones de init y update para el sensor, sistema y actuador.
+TASK_QTY: cantidad de elementos del arreglo anterior
+task_dta_list[TASK_QTY]: arreglo con los peores tiempos de ejecución de cada tarea
+
+app_init(): inicializa el ejecutor cíclico de tareas, donde: 
+ - se ejecuta los métodos task_xxxx_init() de cada tarea 
+ - se inicializa la estructura de datos (dta) de cada tarea
+ 
+app_update():
+ - verifica si es el momento de correr una tarea, comparando el contador de tick
+ - si es así, corre las tareas y guarda el peor tiempo de ejecución de cada tarea 
+ 
+ 

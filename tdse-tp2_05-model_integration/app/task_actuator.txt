@@ -1,0 +1,23 @@
+task_actuator.c (task_actuator.h, task_actuator_attribute.h) 
+   Non-Blocking & Update By Time Code -> Actuator Modeling
+
+task_actuator_interface.c (task_actuator_interface.h)
+   función que carga el evento en el elemento correspondiente de la lista de eventos
+
+task_actuator_attribute.h contiene:
+- la enumeración de eventos y estados del statechart
+- la enumeración de identificadores de actuadores
+- la declaración de los tipos estructuras de configuración (cfg) y datos (dta) de actuadores
+
+task_actuator.c contiene:
+- la definición de dos arrays de estructuras de actuadores, uno de configuración (cfg) y otro de datos (dta) (p/1
+actuador)
+- el método task_actuator_init(), inicializa statechart de actuadores, donde:
+	se inicializa la estructura de datos (dta) de actuator (p/1 actuador)
+	el método task_actuator_update(), ejecuta el statechart de actuadores, donde:
+		hay un switch con tantos case ́s como estados tiene el statechart, donde:
+			c/case tiene tantos if , como transiciones salientes c/eventos [guardas] tiene ese estado, donde:
+			en el cuerpo del if se puede:
+				pasar al statechart siguiente (Actuator) un signal (evento) invocando put_evet_task_...
+				modificar la variable de estado del statechart
+				modificar el tick del statechart
