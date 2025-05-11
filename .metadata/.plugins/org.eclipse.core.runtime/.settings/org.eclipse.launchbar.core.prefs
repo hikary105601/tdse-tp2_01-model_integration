@@ -10,6 +10,7 @@ org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:tdse-tp2_02-model_integration/a
 org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:tdse-tp2_03-model_integration\ Debug/activeLaunchTarget=null\:---
 org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:tdse-tp2_03-model_integration/activeLaunchMode=debug
 org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:tdse-tp2_04-model_integration/activeLaunchMode=run
-org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:tdse-tp2_05-model_integration/activeLaunchMode=run
+org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:tdse-tp2_05-model_integration/activeLaunchMode=debug
+org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:tdse-tp2_05-model_integration/activeLaunchTarget=null\:---
 org.eclipse.launchbar.core.descriptorType.default\:tdse-tp2_03-model_integration\ Debug/activeLaunchMode=debug
 org.eclipse.launchbar.core.descriptorType.default\:tdse-tp2_03-model_integration\ Debug/activeLaunchTarget=org.eclipse.launchbar.core.launchTargetType.local\:Local

@@ -60,21 +60,17 @@
 
 /********************** internal data declaration ****************************/
 const task_actuator_cfg_t task_actuator_cfg_list[] = {
-	{ID_LED1, LED1_GPIO_Port,  LED1_Pin, LED_A_ON,  LED_A_OFF, DEL_LED_XX_BLI, DEL_LED_XX_PUL},
-	{ID_LED2, LED2_GPIO_Port,  LED2_Pin, LED_A_ON,  LED_A_OFF, DEL_LED_XX_BLI, DEL_LED_XX_PUL},
-	{ID_LED3, LED3_GPIO_Port,  LED3_Pin, LED_A_ON,  LED_A_OFF, DEL_LED_XX_BLI, DEL_LED_XX_PUL},
-	{ID_LED4, LED4_GPIO_Port,  LED4_Pin, LED_A_ON,  LED_A_OFF, DEL_LED_XX_BLI, DEL_LED_XX_PUL},
-	{ID_LED5, LED5_GPIO_Port,  LED5_Pin, LED_A_ON,  LED_A_OFF, DEL_LED_XX_BLI, DEL_LED_XX_PUL},
-	{ID_LED6, LED6_GPIO_Port,  LED6_Pin, LED_A_ON,  LED_A_OFF, DEL_LED_XX_BLI, DEL_LED_XX_PUL}
+	{ID_GREEN_TRAFFIC_LIGHT, LED1_GPIO_Port,  LED1_Pin, LED_A_ON,  LED_A_OFF, DEL_LED_XX_BLI, DEL_LED_XX_PUL},
+	{ID_RED_TRAFFIC_LIGHT, LED2_GPIO_Port,  LED2_Pin, LED_A_ON,  LED_A_OFF, DEL_LED_XX_BLI, DEL_LED_XX_PUL},
+	{ID_RISING_MOTOR, LED3_GPIO_Port,  LED3_Pin, LED_A_ON,  LED_A_OFF, DEL_LED_XX_BLI, DEL_LED_XX_PUL},
+	{ID_FALLING_MOTOR, LED4_GPIO_Port,  LED4_Pin, LED_A_ON,  LED_A_OFF, DEL_LED_XX_BLI, DEL_LED_XX_PUL}
 };
 
 #define ACTUATOR_CFG_QTY	(sizeof(task_actuator_cfg_list)/sizeof(task_actuator_cfg_t))
 
 task_actuator_dta_t task_actuator_dta_list[] = {
 	{DEL_LED_XX_MIN, ST_LED_XX_OFF, EV_LED_XX_NOT_BLINK, false},
-	{DEL_LED_XX_MIN, ST_LED_XX_OFF, EV_LED_XX_NOT_BLINK, false},
-	{DEL_LED_XX_MIN, ST_LED_XX_OFF, EV_LED_XX_NOT_BLINK, false},
-	{DEL_LED_XX_MIN, ST_LED_XX_OFF, EV_LED_XX_NOT_BLINK, false},
+	{DEL_LED_XX_MIN, ST_LED_XX_ON, EV_LED_XX_ON, false},
 	{DEL_LED_XX_MIN, ST_LED_XX_OFF, EV_LED_XX_NOT_BLINK, false},
 	{DEL_LED_XX_MIN, ST_LED_XX_OFF, EV_LED_XX_NOT_BLINK, false}
 };
@@ -199,6 +195,8 @@ void task_actuator_update(void *parameters)
 					} else if (p_task_actuator_dta->flag && p_task_actuator_dta->event == EV_LED_XX_ON) {
 						p_task_actuator_dta->flag = false;
 						p_task_actuator_dta->state = ST_LED_XX_ON;
+						HAL_GPIO_WritePin(p_task_actuator_cfg->gpio_port, p_task_actuator_cfg->pin, p_task_actuator_cfg->led_on);
+
 					}
 
 					break;

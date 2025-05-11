@@ -62,7 +62,7 @@
 
 /********************** internal data declaration ****************************/
 task_system_dta_t task_system_dta =
-	{DEL_SYS_XX_MIN, ST_SYS_XX_IDLE, EV_SYS_XX_IDLE, false};
+	{DEL_SYS_XX_MIN, ST_SYS_XX_FREE_SPACE, EV_SYS_XX_NOTHING, false};
 
 #define SYSTEM_DTA_QTY	(sizeof(task_system_dta)/sizeof(task_system_dta_t))
 
@@ -109,6 +109,8 @@ void task_system_init(void *parameters)
 	LOGGER_LOG("   %s = %s\r\n", GET_NAME(b_event), (b_event ? "true" : "false"));
 
 	g_task_system_tick_cnt = G_TASK_SYS_TICK_CNT_INI;
+
+	put_event_task_actuator(EV_LED_XX_ON, ID_RED_TRAFFIC_LIGHT);
 }
 
 void task_system_update(void *parameters)
@@ -152,26 +154,93 @@ void task_system_update(void *parameters)
 			p_task_system_dta->event = get_event_task_system();
 		}
 
+		/*
+		 * Current State		Event				[Guard]			Next State				Actions
+			Espacio libre		Bobina detecta						Solicitud de acceso
+								Bobina no detecta					Espacio libre
+			Solicitud de acceso	Acceso concedido					Barrera subiendo	Semáforo en verde
+																						Iniciar motor subiendo
+								Bobina no detecta					Espacio libre
+			Esperando auto		Sensor IR detecta					Auto entrando
+								Sensor IR no detecta				Esperando auto
+			Auto entrando		Sensor IR no detecta				Barrera bajando		Iniciar motor bajando
+																						Semaforo en rojo
+								Sensor IR detecta					Auto entrando
+			Barrera subiendo	Fin de carrera arriba				Esperando auto		Detener motor Subida
+			Barrera bajando		Fin de carrera abajo				Espacio libre		Detener motor Bajada
+		 */
+
 		switch (p_task_system_dta->state)
 		{
-			case ST_SYS_XX_IDLE:
+			case ST_SYS_XX_FREE_SPACE:
 
-				if ((true == p_task_system_dta->flag) && (EV_SYS_XX_ACTIVE == p_task_system_dta->event))
+				if (p_task_system_dta->flag && p_task_system_dta->event == EV_SYS_XX_COIL_DETECTED)
 				{
 					p_task_system_dta->flag = false;
-					put_event_task_actuator(EV_LED_XX_ON, ID_LED1);
-					p_task_system_dta->state = ST_SYS_XX_ACTIVE;
+					//put_event_task_actuator(EV_LED_XX_ON, ID_LED1);
+					p_task_system_dta->state = ST_SYS_XX_ACCESS_REQUESTED;
+				} else if (p_task_system_dta->flag && p_task_system_dta->event == EV_SYS_XX_COIL_NOT_DETECTED) {
+					p_task_system_dta->flag = false;
+					p_task_system_dta->state = ST_SYS_XX_FREE_SPACE;
 				}
 
 				break;
 
-			case ST_SYS_XX_ACTIVE:
+			case ST_SYS_XX_ACCESS_REQUESTED:
 
-				if ((true == p_task_system_dta->flag) && (EV_SYS_XX_IDLE == p_task_system_dta->event))
+				if (p_task_system_dta->flag && p_task_system_dta->event == EV_SYS_XX_ACCESS_GRANTED)
 				{
 					p_task_system_dta->flag = false;
-					put_event_task_actuator(EV_LED_XX_OFF, ID_LED1);
-					p_task_system_dta->state = ST_SYS_XX_IDLE;
+					put_event_task_actuator(EV_LED_XX_ON, ID_GREEN_TRAFFIC_LIGHT);
+					put_event_task_actuator(EV_LED_XX_OFF, ID_RED_TRAFFIC_LIGHT);
+					put_event_task_actuator(EV_LED_XX_ON, ID_RISING_MOTOR);
+					p_task_system_dta->state = ST_SYS_XX_BARRIER_RISING;
+				} else if (p_task_system_dta->flag && p_task_system_dta->event == EV_SYS_XX_COIL_NOT_DETECTED) {
+					p_task_system_dta->flag = false;
+					p_task_system_dta->state = ST_SYS_XX_FREE_SPACE;
+				}
+
+				break;
+			case ST_SYS_XX_AWAITING_CAR:
+				if (p_task_system_dta->flag && p_task_system_dta->event == EV_SYS_XX_IR_DETECTED)
+				{
+					p_task_system_dta->flag = false;
+					p_task_system_dta->state = ST_SYS_XX_CAR_ENTERING;
+				} else if (p_task_system_dta->flag && p_task_system_dta->event == EV_SYS_XX_IR_NOT_DETECTED) {
+					p_task_system_dta->flag = false;
+					p_task_system_dta->state = ST_SYS_XX_AWAITING_CAR;
+				}
+
+				break;
+			case ST_SYS_XX_CAR_ENTERING:
+				if (p_task_system_dta->flag && p_task_system_dta->event == EV_SYS_XX_IR_NOT_DETECTED)
+				{
+					p_task_system_dta->flag = false;
+					p_task_system_dta->state = ST_SYS_XX_BARRIER_FALLING;
+					put_event_task_actuator(EV_LED_XX_ON, ID_FALLING_MOTOR);
+					put_event_task_actuator(EV_LED_XX_ON, ID_RED_TRAFFIC_LIGHT);
+					put_event_task_actuator(EV_LED_XX_OFF,ID_GREEN_TRAFFIC_LIGHT);
+				} else if (p_task_system_dta->flag && p_task_system_dta->event == EV_SYS_XX_IR_DETECTED) {
+					p_task_system_dta->flag = false;
+					p_task_system_dta->state = ST_SYS_XX_CAR_ENTERING;
+				}
+
+				break;
+			case ST_SYS_XX_BARRIER_RISING:
+				if (p_task_system_dta->flag && p_task_system_dta->event == EV_SYS_XX_LIMIT_SWITCH_UP_DETECTED)
+				{
+					p_task_system_dta->flag = false;
+					p_task_system_dta->state = ST_SYS_XX_AWAITING_CAR;
+					put_event_task_actuator(EV_LED_XX_OFF, ID_RISING_MOTOR);
+				}
+
+				break;
+			case ST_SYS_XX_BARRIER_FALLING:
+				if (p_task_system_dta->flag && p_task_system_dta->event == EV_SYS_XX_LIMIT_SWITCH_DOWN_DETECTED)
+				{
+					p_task_system_dta->flag = false;
+					p_task_system_dta->state = ST_SYS_XX_FREE_SPACE;
+					put_event_task_actuator(EV_LED_XX_OFF, ID_FALLING_MOTOR);
 				}
 
 				break;
